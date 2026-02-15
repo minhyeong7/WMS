@@ -3,15 +3,72 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper>
-    <!--  Result Map  -->
-    <resultMap id="ProductResultMap" type="com.wms.backend.entity.Product">
-        <id property="id" column="id" />
-        <result property="sku" column="sku" />
-        <result property="name" column="name" />
-        <result property="price" column="price" />
-        <result property="currentStock" column="current_stock" />
-        <result property="createdAt" column="created_at" />
-        <result property="updatedAt" column="updated_at" />
-    </resultMap>
+<mapper namespace="com.wms.backend.mapper.ProductMapper">
+
+    <!-- 상품 등록   -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO product(
+            sku,
+            name,
+            price,
+            current_stock
+        ) VALUES(
+            #{sku},
+            #{name},
+            #{price},
+            #{currentStock}
+        )
+    </insert>
+
+    <!-- 상품 전체 조회   -->
+    <select id="findAll" resultType="com.wms.backend.entity.Product">
+        SELECT
+            id,
+            sku,
+            name,
+            price,
+            current_stock,
+            created_at,
+            updated_at
+        FROM product
+        ORDER BY id ASC
+    </select>
+
+    <!-- 상품 단일 조회   -->
+    <select id="findById" resultType="com.wms.backend.entity.Product">
+        SELECT
+            id,
+            sku,
+            name,
+            price,
+            current_stock,
+            created_at,
+            updated_at
+        FROM product
+        WHERE id = #{id}
+    </select>
+
+    <!-- 상품 수정   -->
+    <update id="update">
+        UPDATE product
+        SET
+            name=#{name},
+            price=#{price},
+            current_stock=#{currentStock},
+            updated_at=NOW()
+        WHERE
+            id = #{id}
+
+    </update>
+
+    <!-- 상품 삭제   -->
+    <delete id="delete">
+        DELETE FROM product
+        WHERE
+            id = #{id}
+    </delete>
+
+
+
+
 </mapper>

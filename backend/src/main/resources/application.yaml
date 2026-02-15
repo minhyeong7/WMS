@@ -10,3 +10,7 @@ spring:
     username: ${DB_USERNAME} # DB 계정명 (환경변수)
     password: ${DB_PASSWORD} # DB 비밀번호 (환경변수)
     driver-class-name: org.postgresql.Driver # PostgreSQL JDBC 드라이버
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true # DB camelCase 자동 매핑
