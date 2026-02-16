@@ -48,6 +48,13 @@
         WHERE id = #{id}
     </select>
 
+    <!-- 상품 sku 조회  -->
+    <select id="findBySku" resultType="com.wms.backend.entity.Product">
+        SELECT *
+        FROM product
+        WHERE sku = #{sku}
+    </select>
+
     <!-- 상품 수정   -->
     <update id="update">
         UPDATE product

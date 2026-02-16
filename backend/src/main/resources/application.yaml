@@ -14,3 +14,14 @@ spring:
 mybatis:
   configuration:
     map-underscore-to-camel-case: true # DB camelCase 자동 매핑
+    # 쿼리 그대로 콘솔에 출력
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+logging:
+  level:
+    # Mapper 패키지 전체 DEBUG
+    com.wms.backend.mapper: debug
+    # MyBatis 내부 SQL 로깅
+    org.mybatis: debug
+
+
