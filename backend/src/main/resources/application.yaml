@@ -12,6 +12,7 @@ spring:
     driver-class-name: org.postgresql.Driver # PostgreSQL JDBC 드라이버
 
 mybatis:
+  mapper-locations: classpath:mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true # DB camelCase 자동 매핑
     # 쿼리 그대로 콘솔에 출력
