@@ -1,19 +1,18 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-
 interface User{
     username:string;
     password:string;
 }
 
 const LoginPage = () =>{
-    const [username,setUsername] = useState("");
-    const [password,setPassword] = useState("");
+    const [username,setUsername] = useState("admin");
+    const [password,setPassword] = useState("qwer1234");
     const navigate = useNavigate();
+   
 
-
-    
+    // 계정 목록
     const users : User[] = [
         {username:"admin", password:"qwer1234"},
         {username:"user1", password:"1234"},
@@ -39,7 +38,7 @@ const LoginPage = () =>{
     return(
         <div>
             <form onSubmit={handleLogin}>
-                <h2>로그인</h2>
+                
 
                 <div>
                     <input 
