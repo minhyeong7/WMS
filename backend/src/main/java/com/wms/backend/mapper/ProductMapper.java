@@ -28,6 +28,19 @@ public interface ProductMapper {
     // 삭제
     void delete(@Param("id") Long id);
 
+    // 전체 조회 + 검색 + 정렬 + 페이징
+    List<Product> findProducts(
+            @Param("keyword") String keyword, // 검색어
+            @Param("offset")  int offset, // 페이징 시작 위치
+            @Param("size")    int size, // 데이터 개수
+            @Param("sortColumn") String sortColumn, // 정렬 기준
+            @Param("sortDir") String sortDir // 정렬 방향
+
+    );
+
+    // 상품 전체 개수 조회 (페이징용)
+    int countProducts(@Param("keyword") String keyword);
+
     // 재고 증가
     void increaseStock(@Param("id") Long id,
                        @Param("quantity") Integer quantity);

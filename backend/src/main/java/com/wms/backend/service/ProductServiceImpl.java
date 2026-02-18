@@ -9,7 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -68,6 +70,27 @@ public class ProductServiceImpl implements ProductService {
         }
 
         return toresponseDto(product);
+    }
+
+     // 전체 조회 + 검색 + 정렬 + 페이징
+    @Override
+    public Map<String, Object> findProducts(String keyword, int page, int size,
+                                     String sortColumn, String sortDir){
+        int offset = page * size;
+
+
+        List<Product> products = productMapper.findProducts(keyword, offset, size, sortColumn, sortDir);
+
+        int totalCount = productMapper.countProducts(keyword); // keyword에 의한 전체 데이터 개수
+
+        Map<String, Object> result = new HashMap<>();
+
+        result.put("data", products);
+        result.put("totalCount", totalCount);
+        result.put("page", page);
+        result.put("size", size);
+
+        return result;
     }
 
     // 상품 수정

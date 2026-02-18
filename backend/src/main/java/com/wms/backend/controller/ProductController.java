@@ -26,18 +26,32 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-    // 상품 전체 조회
-    @GetMapping
-    public  ResponseEntity<List<ProductResponseDto>> findAll(){
-        List<ProductResponseDto> response = productService.findAll();
-
-        return ResponseEntity.ok(response);
-    }
+//    // 상품 전체 조회
+//    @GetMapping
+//    public  ResponseEntity<List<ProductResponseDto>> findAll(){
+//        List<ProductResponseDto> response = productService.findAll();
+//
+//        return ResponseEntity.ok(response);
+//    }
 
     // 상품 단일 조회
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> findById(@PathVariable Long id){
         ProductResponseDto response = productService.findById(id);
+
+        return ResponseEntity.ok(response);
+    }
+
+    // 전체 조회 + 검색 + 정렬 + 페이징
+    @GetMapping()
+    public ResponseEntity<Map<String,Object>> findProducts(
+            @RequestParam(required = false) String keyword,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size,
+            @RequestParam(required = false) String sortColumn,
+            @RequestParam(required = false) String sortDir
+    ){
+        Map<String,Object> response = productService.findProducts( keyword, page, size, sortColumn, sortDir);
 
         return ResponseEntity.ok(response);
     }

@@ -75,6 +75,48 @@
             id = #{id}
     </delete>
 
+    <!--  전체 조회 + 검색 + 정렬 + 페이징  -->
+    <select id="findProducts">
+        SELECT *
+        FROM product
+
+        <where>
+            <if test="keyword !=null and keyword!='' ">
+                (
+                    LOWER(name) LIKE CONCAT('%',LOWER(#{keyword}),'%')
+                    OR
+                    LOWER(sku) LIKE CONCAT('%',LOWER(#{keyword}),'%')
+                )
+            </if>
+        </where>
+
+        <choose>
+            <when test="sortColumn != null and sortDir != null ">
+                ORDER BY ${sortColumn} ${sortDir}
+            </when>
+            <otherwise>
+                ORDER BY id ASC
+            </otherwise>
+        </choose>
+
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 상품 개수 조회 (페이징용) -->
+    <select id="countProducts" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        <where>
+            <if test="keyword != null and keyword != ''">
+                (
+                LOWER(name) LIKE CONCAT('%', LOWER(#{keyword}), '%')
+                OR LOWER(sku) LIKE CONCAT('%', LOWER(#{keyword}), '%')
+                )
+            </if>
+        </where>
+    </select>
+
+
 
 
 
