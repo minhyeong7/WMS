@@ -1,46 +1,61 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getProducts } from "../api/productApi";
+import type { ProductResponse } from "../types/ProductResponse";
 
-const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const navigate = useNavigate();
 
-  const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
 
-    // 하드코딩 계정
-    if (username === "admin" && password === "1234") {
-      localStorage.setItem("isLogin", "true");
-      localStorage.setItem("username", username);
-      navigate("/", { replace: true });
-    } else {
-      alert("아이디 또는 비밀번호가 틀렸습니다");
-    }
-  };
+const ProductPage = () => {
+    const [products, setProducts] = useState<ProductResponse[]>([]);
+    const [loading, setLoading] = useState(true);
 
-  return (
-    <form onSubmit={handleLogin}>
-      <h2>로그인</h2>
+    useEffect(()=> {
+      const fetchProducts = async () => {
+        try{
+          const data = await getProducts();
+          setProducts(data);
+        }catch(error){
+          console.error("상품 전체 조회 실패", error)
+        }finally{
+          setLoading(false);
+        }
+      }
 
-      <input
-        placeholder="아이디"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <br />
+      fetchProducts();
+    },[])
+    return(
+      <div>
+        <h2>제품 목록</h2>
+        {loading ? <p>로딩중...</p> :
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>품목코드</th>
+              <th>상품명</th>
+              <th>가격</th>
+              <th>재고</th>
+              <th>생성일</th>
+            </tr>
+          </thead>
 
-      <input
-        type="password"
-        placeholder="비밀번호"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <br />
+          <tbody>
+            {products.map((product) => (
+              <tr key={product.id}>
+                <td>{product.id}</td>
+                <td>{product.sku}</td>
+                <td>{product.name}</td>
+                <td>{product.price}</td>
+                <td>{product.currentStock}</td>
+                <td>{product.createdAt}</td>
+              </tr>
+            ))}
+      
+          </tbody>
+        </table>
+        }
+      </div>
+      
+    )
+}
 
-      <button type="submit">로그인</button>
-    </form>
-  );
-};
-
-export default LoginPage;
+export default ProductPage;
