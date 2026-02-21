@@ -17,6 +17,7 @@ public class StockHistoryServiceImpl {
 
     @Override
     @Transactional
+    // 반입, 반출 이력 인서트
     Map<String,Object> moveStock(Long productId,StockHistoryRequestDto req){
 
     }
