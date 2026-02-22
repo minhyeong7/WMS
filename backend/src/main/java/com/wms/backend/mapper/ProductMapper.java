@@ -42,10 +42,11 @@ public interface ProductMapper {
     int countProducts(@Param("keyword") String keyword);
 
     // 재고 증가
-    void increaseStock(@Param("id") Long id,
+    int increaseStock(@Param("id") Long id,
                        @Param("quantity") Integer quantity);
 
     // 재고 감소
-    void decreaseStock(@Param("id") Long id,
+    int decreaseStock(@Param("id") Long id,
                        @Param("quantity") Integer quantity);
+
 }

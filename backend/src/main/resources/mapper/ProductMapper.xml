@@ -116,6 +116,24 @@
         </where>
     </select>
 
+    <!-- 재고 증가  -->
+    <update id="increaseStock">
+        UPDATE product SET
+        current_stock = current_stock + #{quantity} ,
+        updated_at = NOW()
+        WHERE id = #{id}
+    </update>
+
+    <!-- 재고 감소  -->
+    <update id="decreaseStock">
+        UPDATE product SET
+        current_stock = current_stock - #{quantity} ,
+        updated_at = NOW()
+        WHERE id = #{id} AND current_stock >= #{quantity}
+    </update>
+
+
+
 
 
 

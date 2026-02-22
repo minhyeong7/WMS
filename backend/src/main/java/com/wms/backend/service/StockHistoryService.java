@@ -5,5 +5,9 @@ import java.util.Map;
 
 public interface StockHistoryService {
 
-    Map<String,Object> moveStock(Long productId, StockHistoryRequestDto req);
+    // 반입
+    void stockIn(Long productId, StockHistoryRequestDto req);
+
+    // 반출
+    void stockOut(Long productId, StockHistoryRequestDto req);
 }
