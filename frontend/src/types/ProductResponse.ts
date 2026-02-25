@@ -5,4 +5,5 @@ export interface ProductResponse{
     price:number;
     currentStock:number;
     createdAt:string;
+    updatedAt:string;
 }

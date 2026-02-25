@@ -4,10 +4,19 @@ import type { ProductRequest } from "../types/ProductRequest";
 import type { DeleteProductResponse } from "../types/DeleteProductResponse";
 
 
-// 상품 전체 조회
-export const getProducts = async ():Promise<ProductResponse[]> => {
-    const res = await api.get<ProductResponse[]>("/products");
-    return res.data;
+// // 상품 전체 조회
+// export const getProducts = async ():Promise<ProductResponse[]> => {
+//     const res = await api.get<ProductResponse[]>("/products");
+//     return res.data;
+// }
+
+// 상품 조회 (필터링, 검색, 정렬)
+export const getProducts = async (params = {}) => {
+    const res = await api.get("/products",{params});
+    
+    console.log(res);
+
+    return res.data.data;
 }
 
 // 상품 단일 조회
