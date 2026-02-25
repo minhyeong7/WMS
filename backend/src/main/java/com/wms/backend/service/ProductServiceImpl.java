@@ -153,6 +153,7 @@ public class ProductServiceImpl implements ProductService {
                 .name(product.getName())
                 .currentStock(product.getCurrentStock())
                 .createdAt((product.getCreatedAt()))
+                .updatedAt(product.getUpdatedAt())
                 .build();
     }
 

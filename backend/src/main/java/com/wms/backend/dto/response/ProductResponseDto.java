@@ -18,4 +18,5 @@ public class ProductResponseDto {
     private Integer price;
     private Integer currentStock; // 현재 총 재고 수량
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 }
