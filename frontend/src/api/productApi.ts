@@ -14,16 +14,15 @@ import type { DeleteProductResponse } from "../types/DeleteProductResponse";
 export const getProducts = async (params = {}) => {
     const res = await api.get("/products",{params});
     
-    console.log(res);
 
-    return res.data.data;
+    return res.data;
 }
 
 // 상품 단일 조회
 export const getProduct = async (id:number) : Promise<ProductResponse> => {
     const res = await api.get<ProductResponse>(`/products/${id}`);
 
-    return res.data
+    return res.data;
 }
 
 
