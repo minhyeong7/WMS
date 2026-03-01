@@ -3,7 +3,9 @@ import LoginPage from "./pages/LoginPage"
 import ProtectedRoute from "./components/ProtectedRoute"
 import DashboardPage from "./pages/DashboardPage"
 import ProductPage from "./pages/ProductPage"
-import Sidebar from "./components/SideBar"
+import Sidebar from "./components/Sidebar"
+import Practice from "./pages/practice"
+
 
 
 
@@ -21,6 +23,7 @@ function App() {
           <Route element={<Sidebar />}>
             <Route path="/" element={<DashboardPage />}/>
             <Route path="/products" element={<ProductPage />} />
+            <Route path="practice" element={<Practice />} />
           </Route>
         </Route>
       </Routes>

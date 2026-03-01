@@ -28,6 +28,10 @@ const Sidebar = () => {
           <Link to="/products" className={menuClass("/products")}>
              제품리스트 조회
           </Link>
+
+          <Link to="/practice" className={menuClass("/practice")}>
+             장난감 페이지
+          </Link>
         </nav>
       </aside>
 
