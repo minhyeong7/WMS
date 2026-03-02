@@ -4,7 +4,7 @@ import ProtectedRoute from "./components/ProtectedRoute"
 import DashboardPage from "./pages/DashboardPage"
 import ProductPage from "./pages/ProductPage"
 import Sidebar from "./components/Sidebar"
-import Practice from "./pages/practice"
+import Practice from "./pages/Practice"
 
 
 

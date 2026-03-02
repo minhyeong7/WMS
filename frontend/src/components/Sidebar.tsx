@@ -30,7 +30,7 @@ const Sidebar = () => {
           </Link>
 
           <Link to="/practice" className={menuClass("/practice")}>
-             장난감 페이지
+             테스트 페이지
           </Link>
         </nav>
       </aside>
