@@ -29,7 +29,7 @@ const ProductPage = () => {
 
       setProducts(result.data);
       setCount(result.totalCount);
-      setPage(customPage); // 🔥 조회 성공 후 페이지 동기화
+      setPage(customPage); // 조회 성공 후 페이지 동기화
     } catch (error) {
       console.error("상품 조회 실패", error);
     } finally {
