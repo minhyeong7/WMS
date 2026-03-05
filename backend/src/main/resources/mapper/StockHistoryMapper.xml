@@ -15,4 +15,38 @@
             #{movementQuantity}
         )
     </insert>
+
+    <select id="select" resultType="com.wms.backend.entity.StockHistory">
+        SELECT *
+        FROM stock_history
+
+        <where>
+            <if test="filter != null and keyword!=''">
+                movement_type= #{filter}
+            </if>
+        </where>
+
+        <choose>
+            <when test="sortColumn != null and sortDir != null">
+                ORDER BY ${sortColumn} ${sortDir}
+            </when>
+            <otherwise>
+                ORDER BY id ASC
+            </otherwise>
+        </choose>
+
+        <!--   ex) LIMIT 10 OFFSET 5 = > 5개 건너 뛰고  10(6~15)개 가져오기    -->
+        LIMIT #{size} OFFSET #{offset}
+    </select>
+
+    <!-- 이력 개수 조회 (페이징용) -->
+    <select id="countHistory" resultType="int">
+        SELECT COUNT(*)
+        FROM stock_history
+        <where>
+            <if test="filter != null and filter != ''">
+                movement_type= #{filter}
+            </if>
+        </where>
+    </select>
 </mapper>

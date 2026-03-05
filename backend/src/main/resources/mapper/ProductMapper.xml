@@ -76,7 +76,7 @@
     </delete>
 
     <!--  전체 조회 + 검색 + 정렬 + 페이징  -->
-    <select id="findProducts">
+    <select id="findProducts" resultType="com.wms.backend.entity.Product">
         SELECT *
         FROM product
 
@@ -99,6 +99,7 @@
             </otherwise>
         </choose>
 
+        <!--   ex) LIMIT 10 OFFSET 5 = > 5개 건너 뛰고  10(6~15)개 가져오기    -->
         LIMIT #{size} OFFSET #{offset}
     </select>
 

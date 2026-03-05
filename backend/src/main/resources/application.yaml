@@ -19,6 +19,8 @@ mybatis:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 logging:
+
+
   level:
     # Mapper 패키지 전체 DEBUG
     com.wms.backend.mapper: debug
