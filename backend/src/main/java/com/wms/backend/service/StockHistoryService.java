@@ -10,4 +10,7 @@ public interface StockHistoryService {
 
     // 반출
     void stockOut(Long productId, StockHistoryRequestDto req);
+
+    // 반입 /반출 이력 조회
+    Map<String,Object> select(String filter,String sortColumn, String sortDir, int page, int size );
 }

@@ -21,10 +21,11 @@
         FROM stock_history
 
         <where>
-            <if test="filter != null and keyword!=''">
+            <if test="filter != null and filter!=''">
                 movement_type= #{filter}
             </if>
         </where>
+
 
         <choose>
             <when test="sortColumn != null and sortDir != null">

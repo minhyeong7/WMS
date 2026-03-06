@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     // 전체 조회 + 검색 + 정렬 + 페이징
-    @GetMapping()
+    @GetMapping
     public ResponseEntity<Map<String,Object>> findProducts(
             @RequestParam(required = false) String keyword,
             @RequestParam(defaultValue = "0") int page,

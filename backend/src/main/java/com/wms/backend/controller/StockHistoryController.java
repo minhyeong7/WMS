@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/products")
@@ -31,6 +33,21 @@ public class StockHistoryController {
 
         return ResponseEntity.ok("출고완료");
 
+    }
+
+    // 이력 조회
+    @GetMapping("/history")
+    public ResponseEntity<Map<String,Object>> select(
+            @RequestParam(required = false) String filter,
+            @RequestParam(required = false) String sortColumn,
+            @RequestParam(required = false) String sortDir,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ){
+
+        Map<String,Object> response = stockHistoryService.select(filter,sortColumn,sortDir,page,size);
+
+        return ResponseEntity.ok(response);
     }
 
 }

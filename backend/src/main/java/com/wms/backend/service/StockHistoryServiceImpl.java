@@ -10,6 +10,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.management.RuntimeErrorException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -76,6 +80,31 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 
 
 
-
     }
+
+    // 반입 반출 이력 조회
+    @Override
+    public Map<String,Object> select(String filter, String sortColumn, String sortDir, int page, int size ){
+
+        int offset = page * size; // offset db 행에서 몇 번째 행부터 가져올지 ex ) page 1 size 10 이면 11번째 행부터 가져온다
+
+        if (filter != null && !filter.equals("OUT") && !filter.equals("IN")) {
+            throw new RuntimeException("필터링 값은 'OUT' 또는 'IN'만 가능합니다.");
+        }
+
+        List<StockHistory> list = stockHistoryMapper.select(filter, sortColumn, sortDir , offset ,size);
+
+        int totalCount = stockHistoryMapper.countHistory(filter);
+
+        Map<String,Object> result = new HashMap<>();
+        result.put("data",list);
+        result.put("totalCount",totalCount);
+        result.put("page", page);
+        result.put("size", size);
+
+
+
+        return result;
+    }
+
 }
