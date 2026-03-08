@@ -1,17 +1,19 @@
 import { useEffect, useState } from "react";
 import { getProducts } from "../api/productApi";
 import type { ProductResponse } from "../types/ProductResponse";
+import { Link} from "react-router-dom";
 
 const ProductPage = () => {
   const pageSize = 10;
 
-  const [products, setProducts] = useState<ProductResponse[]>([]);
-  const [loading, setLoading] = useState(false);
-  const [count, setCount] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const [sortColumn, setSortColumn] = useState("id");
-  const [sortDir, setSortDir] = useState("asc");
-  const [page, setPage] = useState(0);
+  const [products, setProducts] = useState<ProductResponse[]>([]); // 데이터 
+  const [loading, setLoading] = useState(false); // 로딩 유무
+  const [count, setCount] = useState(0); // 데이터 총 개수
+  const [keyword, setKeyword] = useState(""); // 키워드 검색
+  const [sortColumn, setSortColumn] = useState("id"); // 정렬 기준 
+  const [sortDir, setSortDir] = useState("asc"); // 내림차순 오름차순
+  const [page, setPage] = useState(0); // 페이지 오프셋
+  
 
   const totalPages = Math.ceil(count / pageSize);
 
@@ -66,18 +68,18 @@ const ProductPage = () => {
     (_, i) => startPage + i
   );
 
-  return (
+ return (
     <div className="p-8 bg-gray-100 min-h-screen">
       <div className="max-w-6xl mx-auto bg-white shadow-sm rounded-lg p-6">
 
         <h2 className="text-2xl font-semibold mb-6">제품 목록</h2>
 
-        {/* 검색 + 정렬 */}
+        {/* 검색 / 정렬 */}
         <div className="flex flex-wrap gap-3 items-center mb-6">
 
           <input
             type="text"
-            placeholder="상품명 검색"
+            placeholder="품목코드 및 상품명"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             className="border rounded-md px-3 py-2 text-sm"
@@ -112,8 +114,9 @@ const ProductPage = () => {
           </button>
 
           <p>
-            총 개수: <span className="font-bold">{count}</span>
+            총 개수 : <span className="font-bold">{count}</span>
           </p>
+
         </div>
 
         {/* 테이블 */}
@@ -122,8 +125,10 @@ const ProductPage = () => {
         ) : (
           <>
             <div className="overflow-x-auto">
-              <table className="w-full border text-sm">
-                <thead className="bg-gray-50">
+
+              <table className="w-full table-fixed border-collapse text-sm">
+
+                <thead className="bg-gray-100 text-center">
                   <tr>
                     <th className="px-4 py-3 border-b">ID</th>
                     <th className="px-4 py-3 border-b">품목코드</th>
@@ -132,26 +137,75 @@ const ProductPage = () => {
                     <th className="px-4 py-3 border-b">재고</th>
                     <th className="px-4 py-3 border-b">생성일</th>
                     <th className="px-4 py-3 border-b">수정일</th>
+                    <th className="px-4 py-3 border-b w-40">재고이동</th>
                   </tr>
                 </thead>
+
                 <tbody>
+
                   {products.map((product) => (
-                    <tr key={product.id}>
-                      <td className="px-4 py-2 border-b">{product.id}</td>
-                      <td className="px-4 py-2 border-b">{product.sku}</td>
-                      <td className="px-4 py-2 border-b">{product.name}</td>
-                      <td className="px-4 py-2 border-b">{product.price}</td>
-                      <td className="px-4 py-2 border-b">{product.currentStock}</td>
+                    <tr
+                      key={product.id}
+                      className="hover:bg-gray-50 text-center"
+                    >
+
+                      <td className="px-4 py-2 border-b">
+                        {product.id}
+                      </td>
+
+                      <td className="px-4 py-2 border-b">
+                        {product.sku}
+                      </td>
+
+                      <td className="px-4 py-2 border-b">
+                        {product.name}
+                      </td>
+
+                      <td className="px-4 py-2 border-b">
+                        {product.price.toLocaleString()}
+                      </td>
+
+                      <td className="px-4 py-2 border-b">
+                        {product.currentStock}
+                      </td>
+
                       <td className="px-4 py-2 border-b">
                         {formatDate(product.createdAt)}
                       </td>
+
                       <td className="px-4 py-2 border-b">
                         {formatDate(product.updatedAt)}
                       </td>
+
+                      <td className="px-4 py-2 border-b">
+
+                        <div className="flex justify-center gap-2">
+
+                          <Link
+                            to={`/stock/${product.id}?type=IN`}
+                            className="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-xs inline-block"
+                          >
+                            반입
+                          </Link>
+
+                          <Link
+                            to={`/stock/${product.id}?type=OUT`}
+                            className="bg-red-500 hover:bg-red-600 text-white px-2 py-1 rounded text-xs inline-block"
+                          >
+                            반출
+                          </Link>
+
+                        </div>
+
+                      </td>
+
                     </tr>
                   ))}
+
                 </tbody>
+
               </table>
+
             </div>
 
             {/* 페이지네이션 */}
@@ -170,7 +224,7 @@ const ProductPage = () => {
                   key={num}
                   onClick={() => fetchProducts(num)}
                   className={`px-3 py-1 border rounded-md
-                    ${page === num
+                  ${page === num
                       ? "bg-gray-800 text-white"
                       : "bg-white hover:bg-gray-100"
                     }`}

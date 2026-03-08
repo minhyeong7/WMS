@@ -5,6 +5,7 @@ import DashboardPage from "./pages/DashboardPage"
 import ProductPage from "./pages/ProductPage"
 import Sidebar from "./components/Sidebar"
 import Practice from "./pages/Practice"
+import StockMovePage from "./pages/StockMovePage"
 
 
 
@@ -24,6 +25,7 @@ function App() {
             <Route path="/" element={<DashboardPage />}/>
             <Route path="/products" element={<ProductPage />} />
             <Route path="practice" element={<Practice />} />
+            <Route path="stock/:id" element={<StockMovePage />} />
           </Route>
         </Route>
       </Routes>

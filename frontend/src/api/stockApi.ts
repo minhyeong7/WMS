@@ -5,7 +5,7 @@ import { api } from "./axios";
 
 // 반입
 export const stockIn = async(id:number,data:StockHistoryRequest)  => {
-    const res = await api.post(`/${id}/in`,data);
+    const res = await api.post(`/products/${id}/in`,data);
 
     console.log("반입:",res)
 
@@ -15,7 +15,7 @@ export const stockIn = async(id:number,data:StockHistoryRequest)  => {
 
 // 반출
 export const stockOut = async(id:number,data:StockHistoryRequest) => {
-     const res = await api.post(`/${id}/out`,data);
+     const res = await api.post(`/products/${id}/out`,data);
 
      console.log("반출:",res)
 
@@ -24,7 +24,7 @@ export const stockOut = async(id:number,data:StockHistoryRequest) => {
 
 // 이력 조회
 export const getHistory =async (params = {}) => {
-    const res = await api.get("/history", {params});
+    const res = await api.get("/products/history", {params});
 
     console.log("이력 조회",res)
 
