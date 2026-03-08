@@ -2,22 +2,16 @@ import type { StockHistoryRequest } from "../types/StockHistoryRequest";
 import { api } from "./axios";
 
 
+// 반입 반출 
+export const moveStock = async(
+    id : number,
+    type: "IN" | "OUT",
+    data: StockHistoryRequest
+) => {
+    const url = type === "IN" ? `/products/${id}/in` : `/products/${id}/out`;
+    const res = await api.post(url,data);
 
-// 반입
-export const stockIn = async(id:number,data:StockHistoryRequest)  => {
-    const res = await api.post(`/products/${id}/in`,data);
-
-    console.log("반입:",res)
-
-
-    return res.data;
-}
-
-// 반출
-export const stockOut = async(id:number,data:StockHistoryRequest) => {
-     const res = await api.post(`/products/${id}/out`,data);
-
-     console.log("반출:",res)
+    console.log(`재고 ${type}`, res);
 
     return res.data;
 }
