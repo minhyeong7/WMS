@@ -42,6 +42,9 @@ const Sidebar = () => {
           <Link to="/products" className={menuClass("/products")}>
              제품리스트 조회
           </Link>
+          <Link to="/history" className={menuClass("/history")}>
+             재고이동 이력 조회
+          </Link>
 
           <Link to="/practice" className={menuClass("/practice")}>
              테스트 페이지
