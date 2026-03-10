@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.management.RuntimeErrorException;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -88,7 +88,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 
         int offset = page * size; // offset db 행에서 몇 번째 행부터 가져올지 ex ) page 1 size 10 이면 11번째 행부터 가져온다
 
-        if (filter != null && !filter.equals("OUT") && !filter.equals("IN")) {
+        if (filter != null && !filter.isEmpty() && !filter.equals("OUT") && !filter.equals("IN")) {
             throw new RuntimeException("필터링 값은 'OUT' 또는 'IN'만 가능합니다.");
         }
 

@@ -50,4 +50,21 @@
             </if>
         </where>
     </select>
+
+
+    <!--  오늘 반입 개수 조회  -->
+    <select id="todayInCount" resultType="int">
+        SELECT COUNT(*)
+        FROM stock_history
+        WHERE movement_type = 'IN' AND DATE(created_at) = CURRENT_DATE;
+    </select>
+
+    <!--  오늘 반출 개수 조회  -->
+    <select id="todayOutCount" resultType="int">
+        SELECT COUNT(*)
+        FROM stock_history
+        WHERE movement_type = 'OUT' AND DATE(created_at) = CURRENT_DATE;
+    </select>
+
+
 </mapper>

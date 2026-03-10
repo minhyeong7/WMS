@@ -49,4 +49,10 @@ public interface ProductMapper {
     int decreaseStock(@Param("id") Long id,
                        @Param("quantity") Integer quantity);
 
+
+    // 등록된 현재 상품 개수
+    int totalProductCount();
+
+    // 등록된 상품 현재 물류량
+    int nowStockCount();
 }

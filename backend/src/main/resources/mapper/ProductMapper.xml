@@ -117,6 +117,8 @@
         </where>
     </select>
 
+
+<!--  해당 재고  where 조건문에 일치하는게 없다면 0을 반환  -->
     <!-- 재고 증가  -->
     <update id="increaseStock">
         UPDATE product SET
@@ -132,6 +134,18 @@
         updated_at = NOW()
         WHERE id = #{id} AND current_stock >= #{quantity}
     </update>
+
+    <!-- 현재 등록된 상품 개수   -->
+    <select id="totalProductCount" resultType="int">
+        SELECT count(*)
+        FROM product
+    </select>
+
+    <!-- 현재 물류 총량   -->
+    <select id="nowStockCount" resultType="int">
+        SELECT SUM(current_stock)
+        FROM product
+    </select>
 
 
 

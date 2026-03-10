@@ -25,4 +25,10 @@ public interface StockHistoryMapper {
             @Param("filter") String filter
     );
 
+    // 오늘 반입 개수
+    int todayInCount();
+
+    // 오늘 반출 개수
+    int todayOutCount();
+
 }
