@@ -38,7 +38,7 @@ public interface ProductMapper {
 
     );
 
-    // 상품 전체 개수 조회 (페이징용)
+    // 물류 전체 개수 조회 (페이징용)
     int countProducts(@Param("keyword") String keyword);
 
     // 재고 증가
@@ -50,9 +50,9 @@ public interface ProductMapper {
                        @Param("quantity") Integer quantity);
 
 
-    // 등록된 현재 상품 개수
+    // 등록된 현재 물류 개수
     int totalProductCount();
 
-    // 등록된 상품 현재 물류량
+    // 등록된 물류 현재 물류량
     int nowStockCount();
 }

@@ -18,7 +18,7 @@ import java.util.Map;
 public class ProductController {
     private final ProductService productService;
 
-    // 상품 등록
+    // 물류 등록
     @PostMapping
     public ResponseEntity<ProductResponseDto> create(@RequestBody ProductRequestDto req){
         ProductResponseDto response = productService.create(req);
@@ -26,7 +26,7 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-//    // 상품 전체 조회
+//    // 물류 전체 조회
 //    @GetMapping
 //    public  ResponseEntity<List<ProductResponseDto>> findAll(){
 //        List<ProductResponseDto> response = productService.findAll();
@@ -34,7 +34,7 @@ public class ProductController {
 //        return ResponseEntity.ok(response);
 //    }
 
-    // 상품 단일 조회
+    // 물류 단일 조회
     @GetMapping("/{id}")
     public ResponseEntity<ProductResponseDto> findById(@PathVariable Long id){
         ProductResponseDto response = productService.findById(id);
@@ -56,7 +56,7 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-    // 상품 수정
+    // 물류 수정
     @PutMapping("/{id}")
     public ResponseEntity<ProductResponseDto> update(@PathVariable Long id, @RequestBody ProductRequestDto req){
         ProductResponseDto response = productService.update(id,req);
@@ -64,13 +64,13 @@ public class ProductController {
         return ResponseEntity.ok(response);
     }
 
-    // 상품 삭제
+    // 물류 삭제
     @DeleteMapping("/{id}")
     public ResponseEntity<Map<String, String>> delete(@PathVariable Long id) {
         productService.delete(id);
 
         return ResponseEntity.ok(
-                Map.of("message", "상품이 정상적으로 삭제되었습니다.")
+                Map.of("message", "물류가 정상적으로 삭제되었습니다.")
         );
     }
 

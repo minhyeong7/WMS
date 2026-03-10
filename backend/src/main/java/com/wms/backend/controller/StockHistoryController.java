@@ -2,6 +2,7 @@ package com.wms.backend.controller;
 
 import com.wms.backend.dto.request.ProductRequestDto;
 import com.wms.backend.dto.request.StockHistoryRequestDto;
+import com.wms.backend.dto.response.DashboardResponseDto;
 import com.wms.backend.dto.response.ProductResponseDto;
 import com.wms.backend.service.StockHistoryService;
 import lombok.RequiredArgsConstructor;
@@ -46,6 +47,14 @@ public class StockHistoryController {
     ){
 
         Map<String,Object> response = stockHistoryService.select(filter,sortColumn,sortDir,page,size);
+
+        return ResponseEntity.ok(response);
+    }
+
+    // 대시보드
+    @GetMapping("/dashboard")
+    public ResponseEntity<DashboardResponseDto> getDashboardSummary(){
+        DashboardResponseDto response = stockHistoryService.getDashboardSummary();
 
         return ResponseEntity.ok(response);
     }

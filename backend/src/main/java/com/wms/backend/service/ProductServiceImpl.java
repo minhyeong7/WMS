@@ -20,7 +20,7 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductMapper productMapper;
 
-    // 상품 등록
+    // 물류 등록
     @Override
     @Transactional
     public ProductResponseDto create(ProductRequestDto req){
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
         return toresponseDto(saved);
     }
 
-    // 상품 전체 조회
+    // 물류 전체 조회
     @Override
     public List<ProductResponseDto> findAll(){
         List<Product> products = productMapper.findAll();
@@ -60,13 +60,13 @@ public class ProductServiceImpl implements ProductService {
                 .toList();
     }
 
-    // 상품 단일 조회
+    // 물류 단일 조회
     @Override
     public ProductResponseDto findById(Long id){
         Product product = productMapper.findById(id);
 
         if(product == null){
-            throw new RuntimeException("조회 할 상품이 존재하지 않습니다 id=" + id);
+            throw new RuntimeException("조회 할 물류가 존재하지 않습니다 id=" + id);
         }
 
         return toresponseDto(product);
@@ -93,14 +93,14 @@ public class ProductServiceImpl implements ProductService {
         return result;
     }
 
-    // 상품 수정
+    // 물류 수정
     @Override
     @Transactional
     public ProductResponseDto update(Long id, ProductRequestDto req) {
-        //  기존 상품 조회
+        //  기존 물류 조회
         Product product = productMapper.findById(id);
         if (product == null) {
-            throw new RuntimeException("수정할 상품이 존재하지 않습니다 id=" + id);
+            throw new RuntimeException("수정할 물류가 존재하지 않습니다 id=" + id);
         }
 
         //  SKU 중복 체크
@@ -109,7 +109,7 @@ public class ProductServiceImpl implements ProductService {
             throw new RuntimeException("이미 존재하는 SKU 입니다.");
         }
 
-        //  상품 정보 수정
+        //  물류 정보 수정
         product = Product.builder()
                 .id(id)  // 기존 id 반드시 포함
                 .sku(req.getSku())
@@ -126,19 +126,19 @@ public class ProductServiceImpl implements ProductService {
 
 
 
-    // 상품 삭제
+    // 물류 삭제
     @Override
     @Transactional
     public void delete(Long id){
         Product product = productMapper.findById(id);
 
         if(product == null){
-            throw new RuntimeException("삭제 할 상품이 존재하지 않습니다 id=" + id);
+            throw new RuntimeException("삭제 할 물류가 존재하지 않습니다 id=" + id);
         }
 
         productMapper.delete(id);
 
-        log.info("상품 삭제 완료: id={}", id);
+        log.info("물류 삭제 완료: id={}", id);
 
     }
 

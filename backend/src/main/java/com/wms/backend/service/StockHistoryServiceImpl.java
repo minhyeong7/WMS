@@ -2,6 +2,7 @@ package com.wms.backend.service;
 
 import com.wms.backend.dto.request.StockHistoryRequestDto;
 
+import com.wms.backend.dto.response.DashboardResponseDto;
 import com.wms.backend.entity.StockHistory;
 import com.wms.backend.mapper.ProductMapper;
 import com.wms.backend.mapper.StockHistoryMapper;
@@ -37,7 +38,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
         int result = productMapper.increaseStock(productId, req.getMovementQuantity());
 
         if(result == 0){
-            throw new IllegalArgumentException("존재하지 않는 상품입니다.");
+            throw new IllegalArgumentException("존재하지 않는 물류입니다.");
         }
 
         // 이력 객체 생성
@@ -65,7 +66,7 @@ public class StockHistoryServiceImpl implements StockHistoryService {
         int result = productMapper.decreaseStock(productId, req.getMovementQuantity());
 
         if(result == 0){
-            throw new IllegalArgumentException("존재하지 않는 상품이거나 현재 재고수량보다 많습니다");
+            throw new IllegalArgumentException("존재하지 않는 물류거나 현재 재고수량보다 많습니다");
         }
 
         // 이력 객체 생성
@@ -105,6 +106,23 @@ public class StockHistoryServiceImpl implements StockHistoryService {
 
 
         return result;
+    }
+
+    // 대시보드
+    @Override
+    public DashboardResponseDto getDashboardSummary(){
+
+        int todayInCount = stockHistoryMapper.todayInCount();
+        int todayOutCount = stockHistoryMapper.todayOutCount();
+        int totalStock = productMapper.nowStockCount();
+        int totalProductCount = productMapper.totalProductCount();
+
+        return DashboardResponseDto.builder()
+                .todayInCount(todayInCount)
+                .todayOutCount(todayOutCount)
+                .nowStockCount(totalStock)
+                .totalProductCount(totalProductCount)
+                .build();
     }
 
 }
