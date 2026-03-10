@@ -33,7 +33,7 @@ const ProductPage = () => {
       setCount(result.totalCount);
       setPage(customPage); // 조회 성공 후 페이지 동기화
     } catch (error) {
-      console.error("상품 조회 실패", error);
+      console.error("물류 조회 실패", error);
     } finally {
       setLoading(false);
     }
@@ -79,7 +79,7 @@ const ProductPage = () => {
 
           <input
             type="text"
-            placeholder="품목코드 및 상품명"
+            placeholder="품목코드 및 물류명"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
             className="border rounded-md px-3 py-2 text-sm"
@@ -91,7 +91,7 @@ const ProductPage = () => {
             className="border rounded-md px-3 py-2 text-sm"
           >
             <option value="id">ID</option>
-            <option value="name">상품명</option>
+            <option value="name">물류명</option>
             <option value="price">가격</option>
             <option value="current_stock">재고</option>
             <option value="created_at">날짜순</option>
@@ -132,7 +132,7 @@ const ProductPage = () => {
                   <tr>
                     <th className="px-4 py-3 border-b">ID</th>
                     <th className="px-4 py-3 border-b">품목코드</th>
-                    <th className="px-4 py-3 border-b">상품명</th>
+                    <th className="px-4 py-3 border-b">물류명</th>
                     <th className="px-4 py-3 border-b">가격</th>
                     <th className="px-4 py-3 border-b">재고</th>
                     <th className="px-4 py-3 border-b">생성일</th>

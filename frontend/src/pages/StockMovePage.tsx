@@ -10,7 +10,7 @@ const StockMovePage = () => {
     const {id} = useParams(); // product id 파라미터 가져오기 위함
     const [searchParams] = useSearchParams(); // url에 있는 type 파라미터 생성위함
     const type = searchParams.get("type"); // IN or OUT
-    const [quantity, setQuantity] = useState<number>(0); // 수량
+    const [quantity, setQuantity] = useState(""); // 수량
     const [stock,setStock] = useState<number>(0); // 현재 재고수량
     
     const navigate = useNavigate();
@@ -18,12 +18,13 @@ const StockMovePage = () => {
     // 반입 및 반출 처리버튼
     const handleSubmit = async () => {
 
-        if (quantity <= 0) {
+        const count = Number(quantity) // quantity는 string 타입이라 형변환
+        if (count <= 0) {
             alert("수량은 0보다 커야 합니다.");
             return;
         }
 
-        if(type === "OUT" && quantity>stock ){
+        if(type === "OUT" && count>stock ){
             alert("현재 재고수량보다 많습니다");
 
             return;
@@ -31,7 +32,7 @@ const StockMovePage = () => {
 
         try {
             const data: StockHistoryRequest = {
-                movementQuantity: quantity
+                movementQuantity: count
             };
 
             await moveStock(Number(id), type as "IN" | "OUT", data);
@@ -70,7 +71,7 @@ const StockMovePage = () => {
 
             <div>
                 <div>
-                    <label className="block mb-1">상품 ID</label>
+                    <label className="block mb-1">물류 ID</label>
                     <input 
                         type="text" 
                         value={id}
@@ -96,7 +97,7 @@ const StockMovePage = () => {
                     <input 
                         type="number"
                         value={quantity}
-                        onChange={(e) => setQuantity(Number(e.target.value))} //e.target.value 의 값이 string이라 Number로 형변환해줌   
+                        onChange={(e) => setQuantity(e.target.value)} //e.target.value 의 값이 string이라 Number로 형변환해줌   
                         className="border p-2 rounded w-full"
                     />
                 </div>

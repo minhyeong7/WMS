@@ -129,7 +129,7 @@ const StockHistoryPage = () => {
                         <thead className="bg-gray-100 text-center">
                             <tr>
                                 <th className="px-4 py-3 border-b">ID</th>
-                                <th className="px-4 py-3 border-b">상품ID</th>
+                                <th className="px-4 py-3 border-b">물류ID</th>
                                 <th className="px-4 py-3 border-b">수량</th>
                                 <th className="px-4 py-3 border-b">재고이동</th>
                                 <th className="px-4 py-3 border-b">생성일</th>
