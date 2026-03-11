@@ -12,7 +12,7 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addMapping("/**")
                 .allowedOrigins(
                         "http://localhost:5173", // 로컬 주소 허용
-                        "https://khaki.vercel.app" // 프론트 버셀 주소 허용
+                        "https://wms-kappa-umber.vercel.app/" // 프론트 버셀 주소 허용
                 )
                 .allowedMethods("GET", "POST", "PUT", "DELETE")
                 .allowedHeaders("*");
