@@ -12,7 +12,7 @@ import type { DeleteProductResponse } from "../types/DeleteProductResponse";
 
 // 상품 조회 (필터링, 검색, 정렬)
 export const getProducts = async (params = {}) => {
-    const res = await api.get("/products",{params});
+    const res = await api.get("/api/products",{params});
     
 
     return res.data;
@@ -20,7 +20,7 @@ export const getProducts = async (params = {}) => {
 
 // 상품 단일 조회
 export const getProduct = async (id:number) : Promise<ProductResponse> => {
-    const res = await api.get<ProductResponse>(`/products/${id}`);
+    const res = await api.get<ProductResponse>(`/api/products/${id}`);
 
     return res.data;
 }
@@ -33,21 +33,21 @@ export const getProduct = async (id:number) : Promise<ProductResponse> => {
 
 // 상품 등록  
 export const createProduct = async (data : ProductRequest)  : Promise<ProductResponse> => {
-    const res = await api.post<ProductResponse>("/products",data);
+    const res = await api.post<ProductResponse>("/api/products",data);
 
     return res.data;
 }
 
 // 상품 수정
 export const updateProduct = async (id:number, data : ProductRequest) :Promise<ProductResponse> => {
-    const res = await api.put<ProductResponse>(`/products/${id}`,data);
+    const res = await api.put<ProductResponse>(`/api/products/${id}`,data);
 
     return res.data
 }
 
 // 상품 삭제
 export const deleteProduct = async (id : number) : Promise<DeleteProductResponse> => {
-    const res = await api.delete<DeleteProductResponse>(`/products/${id}`);
+    const res = await api.delete<DeleteProductResponse>(`/api/products/${id}`);
 
     return res.data;
 }

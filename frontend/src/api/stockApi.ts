@@ -8,7 +8,7 @@ export const moveStock = async(
     type: "IN" | "OUT",
     data: StockHistoryRequest
 ) => {
-    const url = type === "IN" ? `/products/${id}/in` : `/products/${id}/out`;
+    const url = type === "IN" ? `/api/products/${id}/in` : `/api/products/${id}/out`;
     const res = await api.post(url,data);
 
     console.log(`재고 ${type}`, res);
@@ -18,7 +18,7 @@ export const moveStock = async(
 
 // 이력 조회
 export const getHistory =async (params = {}) => {
-    const res = await api.get("/products/history", {params});
+    const res = await api.get("/api/products/history", {params});
 
     console.log("이력 조회",res)
 
