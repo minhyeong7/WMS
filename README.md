@@ -1,18 +1,19 @@
 # WMS Product Management System
 
-상품 조회 및 반입 및 반출 관리 기능을 제공하는 간단한 WMS(Web-based Warehouse Management System) 프로젝트입니다.  
+물류 조회 및 반입 및 반출 관리 기능을 제공하는 간단한 WMS(Web-based Warehouse Management System) 프로젝트입니다.
+
 ---
 
 ## 1. 주요 기능
 
 
 
-### 상품 관리
-- 전체 상품 조회
+### 물류 관리
+- 전체 물류 조회
 - 키워드 검색, 컬럼 기준 정렬 (ASC / DESC), 페이징 처리
-- 상품 등록
-- 상품 수정
-- 상품 삭제
+- 물류 등록
+- 물류 수정
+- 물류 삭제
 - 반입
 - 반출
 
