@@ -7,7 +7,7 @@ import { getProduct } from "../api/productApi";
 
 
 const StockMovePage = () => {
-    const {id} = useParams(); // product id 파라미터 가져오기 위함
+    const {id} = useParams(); // product id 파라미터 가져오기 위함  참고: 파라미터 변수와 할당 변수와 이름 같아야함
     const [searchParams] = useSearchParams(); // url에 있는 type 파라미터 생성위함
     const type = searchParams.get("type"); // IN or OUT
     const [quantity, setQuantity] = useState(""); // 수량

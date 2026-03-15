@@ -7,6 +7,8 @@ import Sidebar from "./components/Sidebar"
 import Practice from "./pages/Practice"
 import StockMovePage from "./pages/StockMovePage"
 import StockHistoryPage from "./pages/StockHistoryPage"
+import ProductCreatePage from "./pages/ProductCreatePage"
+import ProductEditPage from "./pages/ProductEditPage"
 
 
 
@@ -25,6 +27,8 @@ function App() {
           <Route element={<Sidebar />}>
             <Route path="/" element={<DashboardPage />}/>
             <Route path="/products" element={<ProductPage />} />
+            <Route path="/products/new" element={<ProductCreatePage />} />
+            <Route path="/products/:id/edit" element={<ProductEditPage />} />
             <Route path="practice" element={<Practice />} />
             <Route path="stock/:id" element={<StockMovePage />} />
             <Route path="/history" element={<StockHistoryPage/>} />
